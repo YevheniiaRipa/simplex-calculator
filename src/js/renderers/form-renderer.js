@@ -18,14 +18,18 @@ export function buildForm(
   table.className = 'coeff-table';
   const thead = document.createElement('thead');
   const hrow = document.createElement('tr');
-  hrow.appendChild(th('Рядок/Стовпець'));
+  const thRowCol = th('Рядок/Стов&shy;пець');
+  thRowCol.classList.add('js-header-row-col');
+  hrow.appendChild(thRowCol);
   for (let j = 1; j <= n; j++) hrow.appendChild(th(`x<sub>${j}</sub>`));
   hrow.appendChild(th('Знак'));
   hrow.appendChild(th('β'));
   thead.appendChild(hrow);
   const tbody = document.createElement('tbody');
   const of = document.createElement('tr');
-  of.appendChild(td('<strong>Цільова функція</strong>', true));
+  const tdObjFunc = td('<strong>Цільова<br>функція</strong>', true);
+  tdObjFunc.classList.add('js-cell-obj-func');
+  of.appendChild(tdObjFunc);
   for (let j = 1; j <= n; j++)
     of.appendChild(
       td(
@@ -78,7 +82,7 @@ export function buildForm(
   const vbHead = document.createElement('thead');
   const vbHRow = document.createElement('tr');
   vbHRow.appendChild(th('Змінна'));
-  vbHRow.appendChild(th('Обмеження на змінну'));
+  vbHRow.appendChild(th('Обме&shy;жен&shy;ня на змі&shy;нну'));
   vbHead.appendChild(vbHRow);
   const vbBody = document.createElement('tbody');
   for (let j = 1; j <= n; j++) {

@@ -9,12 +9,15 @@
   --table-bg: #0c1022;
   --table-header-bg: #131735;
   --table-highlight-bg: #0f1a3e;
+
   --ink: #e7ecff;
   --muted: #aab3d8;
+
   --accent: #5ec7fa;
   --accent-2: #6dfab7;
   --danger: #ff6b6b;
   --warn: #ffd166;
+
   --grid: #262b47;
   --pivot-col: rgba(110, 212, 255, 0.18);
   --pivot-row: rgba(131, 255, 171, 0.18);
@@ -104,6 +107,7 @@ sub {
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25), inset 0 1px 0 var(--card-border);
 }
 
+/* --- Форми та кнопки --- */
 .grid {
   display: grid;
   gap: 12px;
@@ -128,7 +132,7 @@ select {
   border-radius: 10px;
   padding: 10px 12px;
   outline: none;
-  transition: all 0.2s ease;
+  transition: border 0.2s ease;
   /* width: 100%; */
 }
 
@@ -136,6 +140,7 @@ select {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
+
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23ecf0f1'%3E%3Cpath d='M8 12L0 4h16z'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: calc(100% - 12px) center;
@@ -167,13 +172,13 @@ select:focus {
   color: white;
   padding: 8px 12px;
   border-radius: 10px;
+  cursor: pointer;
   border: 1px solid rgba(255, 255, 255, 0.08);
-  transition: all 0.2s ease;
-  outline: none;
+  transition: transform 300ms ease-in-out, filter 300ms ease-in-out;
 }
 
 .btn:hover:not(:disabled) {
-  filter: brightness(1.3);
+  filter: brightness(1.5);
   transform: scale(1.03);
 }
 
@@ -182,59 +187,46 @@ select:focus {
   cursor: not-allowed;
 }
 
-.btn:focus-visible {
-  border-color: var(--accent);
-  box-shadow: 0 0 0 3px rgba(94, 199, 250, 0.15);
-}
-
-.btn:active:not(:disabled) {
-  transform: scale(0.98);
-  filter: brightness(0.9);
-}
-
 .btn-blue {
   background: linear-gradient(180deg, #3a7bd5, #2756a3);
   box-shadow: 0 4px 20px rgba(58, 123, 213, 0.25);
 }
-
 .btn-green {
   background: linear-gradient(180deg, #2e9c6a, #1f6f4b);
   box-shadow: 0 4px 20px rgba(45, 156, 106, 0.25);
 }
-
 .btn-red {
   background: linear-gradient(180deg, #be3d3d, #8e2a2a);
 }
 
+/* --- Завантажувач файлів --- */
 .file-controls-container {
   display: none;
 }
-
 .file-controls-container.is-open {
   display: flex;
 }
-
 #fileInputLabel.is-hidden {
   display: none;
 }
-
 .file-controls-container > .btn {
   border-radius: 0;
   margin: 0;
 }
-
 .file-controls-container > .btn:first-child {
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
   border-right: 1px solid rgba(255, 255, 255, 0.1);
 }
-
 .file-controls-container > .btn:last-child {
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
 }
 
 #exampleSelector {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23ecf0f1'%3E%3Cpath d='M8 12L0 4h16z'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 10px center;
@@ -244,16 +236,15 @@ select:focus {
   width: auto;
   flex-shrink: 0;
 }
-
 #exampleSelector.open {
   transform: rotate(180deg);
 }
-
 #exampleSelector option {
   background-color: var(--input-bg);
   color: var(--ink);
 }
 
+/* --- Таблиці --- */
 .coeff-matrix,
 .tableau-wrap {
   overflow-x: auto;
@@ -267,6 +258,7 @@ select:focus {
   border-spacing: 0;
 }
 
+/* Загальні стилі для клітинок */
 .coeff-table th,
 .coeff-table td,
 .tableau th,
@@ -278,6 +270,7 @@ select:focus {
   background: var(--table-bg);
 }
 
+/* Заголовки таблиць */
 .coeff-table th,
 .tableau th {
   position: sticky;
@@ -288,22 +281,21 @@ select:focus {
   vertical-align: middle;
 }
 
+/* Таблиця введення даних */
 .coeff-table {
   table-layout: auto;
 }
-
 .coeff-table td {
   white-space: normal;
   hyphens: auto;
 }
-
 .coeff-table input {
   width: 100%;
   min-width: 50px;
-  /* max-width: 80px; */
   padding: 6px;
 }
 
+/* Таблиця розв'язку */
 .tableau {
   table-layout: auto;
 }
@@ -311,12 +303,14 @@ select:focus {
 .tableau td,
 .tableau th {
   min-width: 60px;
+  /* white-space: nowrap; */
 }
-
 .tableau td:first-child,
 .tableau th:first-child {
   min-width: auto;
   width: 25%;
+  /* white-space: normal;
+  hyphens: auto; */
 }
 
 .tableau tbody td {
@@ -327,35 +321,20 @@ select:focus {
   white-space: normal;
 }
 
-.tableau .rhs,
-.tableau .obj,
-tr.obj-row td {
-  background: var(--table-highlight-bg);
+.tableau .pivot-col {
+  background: var(--pivot-col);
 }
-
-.tableau .rhs {
-  font-weight: 700;
+.tableau .pivot-row {
+  background: var(--pivot-row);
 }
-
-.tableau tbody tr td.pivot-col {
-  background-color: var(--pivot-col);
-}
-
-.tableau tbody tr td.pivot-row {
-  background-color: var(--pivot-row);
-}
-
-.tableau tbody tr td.pivot-elem {
-  background-color: var(--pivot-elem);
+.tableau .pivot-elem {
+  background: var(--pivot-elem);
   box-shadow: inset 0 0 0 2px rgba(0, 0, 0, 0.25);
-}
-
-.tableau-snapshot {
-  margin-bottom: 24px;
 }
 
 .status {
   margin-top: 12px;
+  margin-bottom: 12px;
   padding: 0;
   color: var(--accent-2);
   font-size: 13px;
@@ -367,48 +346,51 @@ tr.obj-row td {
   display: none;
   margin-top: 20px;
 }
-
+.graphic-title {
+  margin-bottom: 16px;
+  text-align: center;
+}
 #jxgbox {
   width: 100%;
   max-width: 900px;
   aspect-ratio: 4 / 3;
   margin: 0 auto;
-  border: 1px solid var(--grid);
+  border: 1px solid #ccc;
 }
 
+/* --- Стилізація скролбару --- */
 ::-webkit-scrollbar {
   height: 8px;
   width: 8px;
 }
-
 ::-webkit-scrollbar-track {
   background: var(--input-bg);
   border-radius: 4px;
 }
-
 ::-webkit-scrollbar-thumb {
   background-color: var(--grid);
   border-radius: 4px;
   border: 2px solid var(--input-bg);
 }
-
 ::-webkit-scrollbar-thumb:hover {
   background-color: var(--muted);
 }
-
 * {
   scrollbar-width: thin;
   scrollbar-color: var(--grid) var(--input-bg);
 }
 
-@media (max-width: 767px) {
-  .coeff-table .js-header-row-col,
-  .coeff-table .js-cell-obj-func {
+@media (max-width: 480px) {
+  .coeff-table .js-header-row-col {
     font-size: 0;
   }
   .coeff-table .js-header-row-col::before {
     content: '';
     font-size: 12px;
+  }
+
+  .coeff-table .js-cell-obj-func {
+    font-size: 0;
   }
   .coeff-table .js-cell-obj-func::before {
     content: 'f(x)';
