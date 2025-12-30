@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.png" />
+    <title>Симплекс-калькулятор</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="//cdnjs.cloudflare.com/ajax/libs/jsxgraph/1.4.6/jsxgraph.css"
+    />
+    <link rel="stylesheet" href="/src/styles.css" />
+  </head>
+  <body>
+    <header class="app-header">
+      <h1>Симплекс-метод – покроковий калькулятор</h1>
+    </header>
+
+    <main class="container">
+      <section class="card">
+        <h2 class="visually-hidden">Постановка задачі</h2>
+        <div class="grid grid-3">
+          <label>
+            <span>Кількість змінних (n)</span>
+            <input id="numVars" type="number" min="1" value="3" />
+          </label>
+          <label>
+            <span>Кількість обмежень (m)</span>
+            <input id="numCons" type="number" min="1" value="3" />
+          </label>
+          <label>
+            <span>Тип задачі</span>
+            <select id="problemType">
+              <option value="max">max</option>
+              <option value="min">min</option>
+            </select>
+          </label>
+        </div>
+        <div class="actions">
+          <button id="loadTestTaskBtn" class="btn">Тестове завдання</button>
+          <button id="solveAllBtn" class="btn btn-green">Розв'язання</button>
+          <button id="toggleFractionBtn" class="btn btn-blue">
+            Вигляд: ДРОБИ
+          </button>
+          <button id="clearDataBtn" class="btn btn-blue">Очистити дані</button>
+          <button id="reset" class="btn btn-red">Очистити розв'язання</button>
+
+          <label for="fileInput" id="fileInputLabel" class="btn"
+            >Обрати файл...</label
+          >
+
+          <input
+            id="fileInput"
+            type="file"
+            accept=".json"
+            style="display: none"
+          />
+          <div class="file-controls-container" id="fileControlsContainer">
+            <select
+              id="exampleSelector"
+              class="btn"
+              style="display: none"
+            ></select>
+            <button id="loadSelectedExample" class="btn" style="display: none">
+              Завантажити обране
+            </button>
+          </div>
+        </div>
+        <div id="coeffForms"></div>
+        <div id="prettyProblem" class="card" style="margin-top: 12px"></div>
+      </section>
+
+      <section class="card">
+        <h2 class="visually-hidden">Cимплекс-метод</h2>
+        <div id="tableauContainer" class="tableau-wrap"></div>
+        <div id="status" class="status"></div>
+      </section>
+
+      <div class="graphic-container" id="graph-container">
+        <h3 class="graphic-title">Графічне представлення задачі</h3>
+        <div id="jxgbox" class="jxgbox"></div>
+      </div>
+    </main>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
