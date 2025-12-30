@@ -368,6 +368,11 @@ tr.obj-row td {
   margin-top: 20px;
 }
 
+.graphic-title {
+  margin-bottom: 16px;
+  text-align: center;
+}
+
 #jxgbox {
   width: 100%;
   max-width: 900px;
