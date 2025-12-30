@@ -313,18 +313,8 @@ select:focus {
   min-width: 60px;
 }
 
-.tableau td:first-child,
-.tableau th:first-child {
-  min-width: auto;
-  width: 25%;
-}
-
 .tableau tbody td {
   white-space: nowrap;
-}
-
-.tableau tbody td:first-child {
-  white-space: normal;
 }
 
 .tableau .rhs,
@@ -352,6 +342,13 @@ tr.obj-row td {
 
 .tableau-snapshot {
   margin-bottom: 24px;
+}
+
+#prettyProblem {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  line-height: 1.6;
+  white-space: normal;
 }
 
 .status {
