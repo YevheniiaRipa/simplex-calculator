@@ -102,13 +102,10 @@ export function choosePhase1Pivot(T, m, n, nonBasicOrder) {
     }
   }
 
-  // Якщо після всіх перевірок ми не змогли знайти рядок, це вироджений випадок.
-  // Можна вважати, що розв'язку немає.
   if (pivotRow === -1) {
     return { infeasible: true, row: candidateRow };
   }
 
-  // Повертаємо координати розв'язувального елемента.
   return { row: pivotRow, col: pivotCol };
 }
 
@@ -146,13 +143,11 @@ export function isAllBNonNegative(T, m, n) {
 export function findAlternativeSolution(finalState) {
   const { tableau, m, nTotal, base, nonBasicOrder, nOrig } = finalState;
 
-  // Перевіряємо, чи є сенс шукати (тільки для 2D задач)
   if (nOrig !== 2) return null;
 
   const epsilon = 1e-9;
   const objRow = tableau[m];
 
-  // Шукаємо небазисну змінну з нульовим коефіцієнтом
   let enteringVarCol = -1;
   for (const varIndex of nonBasicOrder) {
     if (Math.abs(objRow[varIndex]) < epsilon) {
@@ -162,10 +157,9 @@ export function findAlternativeSolution(finalState) {
   }
 
   if (enteringVarCol === -1) {
-    return null; // Альтернативних розв'язків немає
+    return null;
   }
 
-  // Знаходимо рядок для виходу з базису
   let leavingVarRow = -1;
   let minRatio = Infinity;
   for (let i = 0; i < m; i++) {
@@ -180,22 +174,19 @@ export function findAlternativeSolution(finalState) {
   }
 
   if (leavingVarRow === -1) {
-    return null; // Не вдалося знайти змінну для виводу
+    return null;
   }
 
-  // Робимо "віртуальний" крок на копіях даних
   const tempTableau = tableau.map(row => row.slice());
   const tempBase = base.slice();
   jordanElimination(tempTableau, m, nTotal, leavingVarRow, enteringVarCol);
   tempBase[leavingVarRow] = enteringVarCol;
 
-  // Обчислюємо новий повний вектор розв'язку (для "штучних" змінних)
   const alternativeSolutionVector = Array(nTotal).fill(0);
   for (let i = 0; i < m; i++) {
     alternativeSolutionVector[tempBase[i]] = tempTableau[i][nTotal];
   }
 
-  // ЗМІНА: Повертаємо об'єкт з повним вектором, а не тільки з точкою
   return {
     solutionVector: alternativeSolutionVector,
   };
